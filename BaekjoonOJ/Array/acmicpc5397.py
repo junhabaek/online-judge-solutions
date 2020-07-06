@@ -1,8 +1,10 @@
+from collections import deque
+
 test_case_counts = int(input())
 
 for i in range(test_case_counts):
     cur_test_case = input()
-    result_list = []
+    result_list = deque()
     result_index = 0
     for char in cur_test_case:
         if char == '-':
