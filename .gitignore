@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# easy questions
+acmicpc2798.py
+acmicpc2920.py
+acmicpc1920.py
+acmicpc10930.py
