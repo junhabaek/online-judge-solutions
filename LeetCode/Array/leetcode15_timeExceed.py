@@ -3,21 +3,38 @@ from typing import List
 
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        left_idx, right_idx, max_idx = 0, 1, len(nums) - 1
-
         result_list = []
+        nums.sort()
 
-        while left_idx < max_idx - 1:
-            right_idx = left_idx + 1
-            while right_idx < max_idx:
-                target = -(nums[left_idx] + nums[right_idx])
-                if target in nums[right_idx + 1:]:
-                    cur_result = [nums[left_idx], nums[right_idx], target]
-                    cur_result.sort()
+        for i in range(len(nums) - 2):
+            target = nums[i]
+            left_idx, right_idx = i + 1, len(nums) - 1
 
-                    if cur_result not in result_list:
-                        result_list.append(cur_result)
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
 
-                right_idx = right_idx + 1
-            left_idx = left_idx + 1
+            while left_idx < right_idx:
+                left_val, right_val = nums[left_idx], nums[right_idx]
+
+                if left_val + right_val == -target:
+                    temp_list = [left_val, right_val, target]
+                    temp_list.sort()
+                    if temp_list not in result_list:
+                        result_list.append(temp_list)
+
+                    while left_idx < right_idx and nums[left_idx] == nums[left_idx + 1]:
+                        left_idx = left_idx + 1
+
+                    while left_idx < right_idx and nums[right_idx] == nums[right_idx - 1]:
+                        right_idx = right_idx - 1
+
+                    left_idx = left_idx + 1
+                    right_idx = right_idx - 1
+
+                cur_sum = left_val + right_val + target
+                if cur_sum < 0:
+                    left_idx = left_idx + 1
+                elif cur_sum > 0:
+                    right_idx = right_idx - 1
+
         return result_list
