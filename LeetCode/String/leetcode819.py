@@ -9,7 +9,7 @@ class Solution:
 
         word_counts = {}
         for word in pure_words:
-            if not word in banned:
+            if word not in banned:
                 word_counts[word] = word_counts.get(word, 0) + 1
 
         max_word = max(word_counts.keys(), key=lambda cur_word: word_counts[cur_word])
